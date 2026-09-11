@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 export default function Testimonials() {
   const [isVisible, setIsVisible] = useState(false);
@@ -29,22 +30,20 @@ export default function Testimonials() {
 
   const testimonials = [
     {
-      quote: "Calibre Audits has transformed how we manage quality control across our 15 properties. The time savings alone paid for itself in the first month.",
-      author: "Sarah Mitchell",
-      role: "Director of Operations",
-      company: "Luxury Hotel Group"
+      quote: "Calibre Audits revolutionized our entire audit process. What used to take hours now takes minutes. The streamlined workflow and automation have made our inspections faster and more thorough, which directly translates to higher profits and better guest experiences across all our properties.",
+      author: "Danny",
+      role: "Owner",
+      company: "Inspired Hospitality",
+      image: "/danny.jpeg",
+      featured: true
     },
     {
-      quote: "The mobile app is a game-changer. Our auditors can work seamlessly on-site, and management gets real-time visibility into every inspection.",
-      author: "James Rodriguez",
-      role: "Quality Assurance Manager",
-      company: "Metropolitan Hotels"
-    },
-    {
-      quote: "Finally, an audit platform built by people who understand hotels. The compliance tracking features have saved us from countless headaches.",
-      author: "Emily Chen",
-      role: "VP of Compliance",
-      company: "Coastal Resorts International"
+      quote: "Implementing Calibre Audits across our properties has transformed our quality assurance program. The real-time reporting and actionable insights have elevated our service standards, resulting in consistently higher guest satisfaction scores and operational excellence.",
+      author: "Omni Hotels & Resorts",
+      role: "Quality Assurance Team",
+      company: "Omni Hotels & Resorts",
+      image: "/omni.png",
+      featured: true
     }
   ];
 
@@ -69,7 +68,7 @@ export default function Testimonials() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
@@ -97,9 +96,26 @@ export default function Testimonials() {
                 </div>
 
                 <div className="border-t border-gray-800 pt-4">
-                  <p className="font-semibold text-white mb-1">{testimonial.author}</p>
-                  <p className="text-sm text-[#C9A84C] mb-1">{testimonial.role}</p>
-                  <p className="text-sm text-gray-500">{testimonial.company}</p>
+                  <div className="flex items-center gap-4">
+                    {testimonial.image && (
+                      <Image 
+                        src={testimonial.image} 
+                        alt={testimonial.author}
+                        width={64}
+                        height={64}
+                        className={`w-16 h-16 object-contain ${
+                          testimonial.author === 'Omni Hotels & Resorts' 
+                            ? 'bg-white rounded-lg p-2' 
+                            : 'rounded-full object-cover border-2 border-[#C9A84C]'
+                        }`}
+                      />
+                    )}
+                    <div>
+                      <p className="font-semibold text-white mb-1">{testimonial.author}</p>
+                      <p className="text-sm text-[#C9A84C] mb-1">{testimonial.role}</p>
+                      <p className="text-sm text-gray-500">{testimonial.company}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
