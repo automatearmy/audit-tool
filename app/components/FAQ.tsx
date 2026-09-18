@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useTheme } from '../contexts/ThemeContext';
 
 export default function FAQ() {
   const [isVisible, setIsVisible] = useState(false);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const sectionRef = useRef<HTMLElement>(null);
+  const { colors } = useTheme();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -58,17 +60,15 @@ export default function FAQ() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 md:py-32 bg-[#242438] overflow-hidden"
+      className="relative py-20 md:py-32 overflow-hidden transition-colors duration-300"
+      style={{ backgroundColor: colors.bg.secondary }}
     >
       <div className="relative z-10 container mx-auto px-6">
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="inline-block mb-4 px-4 py-2 border border-[#C9A84C] rounded-full">
-            <span className="text-[#C9A84C] text-sm font-medium tracking-wider uppercase">FAQ</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Questions? <span className="text-[#C9A84C]">We've Got Answers</span>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6" style={{ color: colors.text.primary }}>
+            Questions? <span className="text-[var(--gold)]">We've Got Answers</span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl max-w-3xl mx-auto" style={{ color: colors.text.tertiary }}>
             Everything you need to know about Calibre Audits
           </p>
         </div>
@@ -77,21 +77,25 @@ export default function FAQ() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className={`group bg-[#1a1a2e] border border-gray-800 rounded-xl overflow-hidden
-                        hover:border-[#C9A84C] transition-all duration-500
+              className={`group border rounded-xl overflow-hidden
+                        hover:border-[var(--gold)] transition-all duration-500
                         ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              style={{ 
+                transitionDelay: `${index * 100}ms`,
+                backgroundColor: colors.bg.card,
+                borderColor: colors.border.default
+              }}
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="w-full text-left p-6 flex items-center justify-between gap-4"
               >
-                <h3 className="text-xl font-semibold text-white group-hover:text-[#C9A84C] transition-colors">
+                <h3 className="text-xl font-semibold group-hover:text-[var(--gold)] transition-colors" style={{ color: colors.text.primary }}>
                   {faq.question}
                 </h3>
-                <div className={`flex-shrink-0 w-8 h-8 rounded-full bg-[#C9A84C] bg-opacity-20 flex items-center justify-center
+                <div className={`flex-shrink-0 w-8 h-8 rounded-full bg-[var(--gold)] bg-opacity-20 flex items-center justify-center
                                transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}>
-                  <svg className="w-5 h-5 text-[#C9A84C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-[var(--gold)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </div>
@@ -99,8 +103,8 @@ export default function FAQ() {
               
               <div className={`overflow-hidden transition-all duration-500 ${openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
                 <div className="px-6 pb-6">
-                  <div className="pt-4 border-t border-gray-800">
-                    <p className="text-gray-400 leading-relaxed">
+                  <div className="pt-4 border-t" style={{ borderColor: colors.border.default }}>
+                    <p className="leading-relaxed" style={{ color: colors.text.tertiary }}>
                       {faq.answer}
                     </p>
                   </div>

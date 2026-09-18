@@ -1,10 +1,12 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useTheme } from '../contexts/ThemeContext';
 
 export default function Features() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const { colors } = useTheme();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -29,92 +31,89 @@ export default function Features() {
 
   const features = [
     {
-      icon: '📱',
-      title: 'Mobile-First Auditing',
-      description: 'Conduct audits anywhere with our intuitive mobile app. Offline mode ensures you never lose progress.',
-      benefits: ['Works offline', 'Photo documentation', 'Voice notes', 'GPS tagging']
+      icon: '⚡',
+      title: 'Audits in Minutes, Not Hours',
+      description: 'Legacy tools force rigid, all-or-nothing checklists that take hours to complete. Calibre Audits lets you pick up and put down audits on your phone, cutting completion time from hours to minutes.',
+      outcome: 'Outcome: Auditors reclaim hours every week to spend on guest experience instead of paperwork'
     },
     {
-      icon: '📊',
-      title: 'Smart Analytics',
-      description: 'Actionable insights powered by AI. Identify trends, predict issues, and optimize performance.',
-      benefits: ['Custom dashboards', 'Trend analysis', 'Predictive alerts', 'Export reports']
+      icon: '🎯',
+      title: 'Audit Exactly What You Need',
+      description: 'Competitor platforms require a full-property sweep every time. With dynamic segment auditing, you can check just the housekeeping floor, the front desk, or a single room on your own schedule.',
+      outcome: 'Outcome: No more forced full-property audits when you only need a quick spot-check'
     },
     {
-      icon: '✅',
-      title: 'Compliance Tracking',
-      description: 'Stay ahead of regulations with automated compliance monitoring and deadline management.',
-      benefits: ['Regulatory updates', 'Auto reminders', 'Certification tracking', 'Audit trails']
+      icon: '📈',
+      title: 'Provable Accountability Over Time',
+      description: 'Spreadsheets and paper checklists give you a snapshot, not a story. Calibre Audits tracks trends across every property and shift, so you can walk into any exec meeting with data-backed proof.',
+      outcome: 'Outcome: Replace guesswork with hard evidence that you\'re meeting brand standards'
     },
     {
-      icon: '👥',
-      title: 'Team Collaboration',
-      description: 'Streamline communication with task assignments, comments, and real-time notifications.',
-      benefits: ['Role-based access', 'Task management', 'In-app messaging', 'Activity logs']
-    },
-    {
-      icon: '🔒',
-      title: 'Enterprise Security',
-      description: 'Bank-level encryption and compliance with SOC 2, GDPR, and industry standards.',
-      benefits: ['256-bit encryption', 'SSO integration', 'Data backups', 'Compliance certified']
-    },
-    {
-      icon: '🔄',
-      title: 'Seamless Integrations',
-      description: 'Connect with your existing PMS, accounting software, and other hotel management tools.',
-      benefits: ['API access', 'Pre-built integrations', 'Custom webhooks', 'Data sync']
+      icon: '🤖',
+      title: 'Built for What\'s Next',
+      description: 'While competitors are stuck with static forms, Calibre Audits is built on a modern platform with AI dictation and intelligent recommendations on the roadmap.',
+      outcome: 'Outcome: You\'re investing in a platform that gets smarter, not one that gets stale'
     }
   ];
+
+
 
   return (
     <section
       ref={sectionRef}
       id="features"
-      className="relative py-20 md:py-32 bg-gradient-to-b from-[#242438] to-[#1a1a2e] overflow-hidden"
+      className="relative py-20 md:py-32 overflow-hidden transition-colors duration-300"
+      style={{ backgroundColor: colors.bg.primary }}
     >
       <div className="relative z-10 container mx-auto px-6">
-        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="inline-block mb-4 px-4 py-2 border border-[#C9A84C] rounded-full">
-            <span className="text-[#C9A84C] text-sm font-medium tracking-wider uppercase">Features</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Everything You Need, <span className="text-[#C9A84C]">Nothing You Don't</span>
+        <div className={`mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6" style={{ color: colors.text.primary }}>
+            Audit Your Standards. <span className="text-[var(--gold)]">Prove You're Meeting Them.</span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Powerful features designed specifically for hotel audit professionals
+          <p className="text-xl max-w-3xl" style={{ color: colors.text.tertiary }}>
+            Here's how Calibre Audits outperforms manual spreadsheets and legacy audit tools.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="max-w-4xl space-y-6">
           {features.map((feature, index) => (
             <div
               key={index}
-              className={`group relative bg-[#242438] border border-gray-800 rounded-2xl p-8 
-                        hover:border-[#C9A84C] transition-all duration-500 hover:shadow-2xl
-                        hover:transform hover:scale-105
+              className={`group relative flex items-start gap-6 p-6 rounded-lg border backdrop-blur-sm hover:border-[var(--gold)]
+                        transition-all duration-500 hover:translate-x-2
                         ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              style={{
+                transitionDelay: `${index * 150}ms`,
+                backgroundColor: colors.bg.card + '80',
+                borderColor: colors.border.default
+              }}
             >
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#C9A84C] to-[#8888aa] opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
-              
-              <div className="relative z-10">
-                <div className="text-5xl mb-4">{feature.icon}</div>
-                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#C9A84C] transition-colors">
+              {/* Icon */}
+              <div className="text-4xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                {feature.icon}
+              </div>
+
+              {/* Content */}
+              <div className="flex-1">
+                <h3
+                  className="text-xl md:text-2xl font-bold mb-2 group-hover:text-[var(--gold)] transition-colors"
+                  style={{ color: colors.text.primary }}
+                >
                   {feature.title}
                 </h3>
-                <p className="text-gray-400 mb-6 leading-relaxed">
+                <p
+                  className="leading-relaxed mb-3"
+                  style={{ color: colors.text.tertiary }}
+                >
                   {feature.description}
                 </p>
-                
-                <ul className="space-y-2">
-                  {feature.benefits.map((benefit, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm text-gray-500">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]"></div>
-                      <span>{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-sm text-[var(--gold)] italic">
+                  ✓ {feature.outcome}
+                </p>
               </div>
+
+              {/* Accent line on hover */}
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--gold)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-l-lg"></div>
             </div>
           ))}
         </div>
@@ -122,3 +121,4 @@ export default function Features() {
     </section>
   );
 }
+

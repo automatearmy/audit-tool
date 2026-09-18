@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 import Hero from './components/Hero';
 import Problem from './components/Problem';
 import Solution from './components/Solution';
@@ -10,14 +11,19 @@ import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import CTA from './components/CTA';
 
-export default function Home() {
+function HomeContent() {
+  const { colors } = useTheme();
+
   useEffect(() => {
     // Scroll to top on page load/reload
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#1a1a2e]">
+    <div 
+      className="min-h-screen transition-colors duration-300"
+      style={{ backgroundColor: colors.bg.primary }}
+    >
       <Hero />
       <Problem />
       <Solution />
@@ -27,6 +33,14 @@ export default function Home() {
       <FAQ />
       <CTA />
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <ThemeProvider>
+      <HomeContent />
+    </ThemeProvider>
   );
 }
 

@@ -4,7 +4,37 @@
   --background: #1a1a2e;
   --foreground: #ffffff;
   --gold: #C9A84C;
+  --gold-hover: #d4b660;
+  --dark-text: #1a1a2e;
   --purple-gray: #8888aa;
+}
+
+html.light {
+  --background: #ffffff;
+  --background-secondary: #f8f9fa;
+  --foreground: #1a1a2e;
+  --text-secondary: #4a5568;
+  --border: #e2e8f0;
+}
+
+html.patriotic-light {
+  --background: #ffffff;
+  --background-secondary: #f0f5ff;
+  --foreground: #1a1a2e;
+  --gold: #ff605a;
+  --gold-hover: #e5473f;
+  --dark-text: #ffffff;
+  --purple-gray: #85aef6;
+}
+
+html.patriotic-dark {
+  --background: #85aef6;
+  --background-secondary: #6b98e8;
+  --foreground: #ffffff;
+  --gold: #ff605a;
+  --gold-hover: #e5473f;
+  --dark-text: #ffffff;
+  --purple-gray: #f0f5ff;
 }
 
 @theme inline {
@@ -20,6 +50,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 html {
@@ -54,3 +85,4 @@ html {
 .animate-fade-in {
   animation: fadeIn 0.8s ease-out forwards;
 }
+
